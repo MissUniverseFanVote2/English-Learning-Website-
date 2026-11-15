@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6556d9">
+<title>WAI'S ENGLISH LEARNING ACADEMY</title>
+
+<style>
+:root{
+  --primary:#6658d9;
+  --secondary:#9278ed;
+  --bg:#f6f7fc;
+  --card:#ffffff;
+  --text:#25243a;
+  --muted:#77778d;
+  --border:#e9e8f2;
+  --soft:#f0edff;
+  --shadow:0 8px 30px rgba(55,45,120,.07);
+}
+body.dark{
+  --bg:#151522;
+  --card:#202033;
+  --text:#f4f3ff;
+  --muted:#b3b0c9;
+  --border:#35334b;
+  --soft:#302b50;
+  --shadow:0 8px 30px rgba(0,0,0,.2);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,"Noto Sans Myanmar",sans-serif;
+  line-height:1.7;
+  transition:.25s;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.topbar{
+  height:70px;background:var(--card);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;position:sticky;top:0;z-index:20;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--primary)}
+.brand-logo{
+  width:42px;height:42px;border-radius:14px;
+  background:linear-gradient(135deg,var(--primary),#ad78f0);
+  display:grid;place-items:center;color:white;font-size:20px;
+}
+.top-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  border:1px solid var(--border);background:var(--card);
+  color:var(--text);border-radius:12px;padding:9px 13px;
+}
+.layout{display:grid;grid-template-columns:255px 1fr;min-height:calc(100vh - 70px)}
+.sidebar{
+  background:var(--card);border-right:1px solid var(--border);
+  padding:22px 15px;position:sticky;top:70px;height:calc(100vh - 70px);
+  overflow-y:auto;
+}
+.side-label{
+  color:var(--muted);font-size:11px;font-weight:bold;
+  letter-spacing:1px;padding:15px 12px 7px;
+}
+.nav-btn{
+  width:100%;display:flex;align-items:center;gap:12px;
+  border:0;background:transparent;color:var(--muted);
+  text-align:left;padding:11px 13px;border-radius:12px;
+  margin:2px 0;font-size:14px;
+}
+.nav-btn:hover,.nav-btn.active{
+  background:var(--soft);color:var(--primary);font-weight:bold;
+}
+.main{padding:30px 4%;max-width:1500px;width:100%;margin:auto}
+.hero{
+  border-radius:25px;padding:35px;
+  background:linear-gradient(120deg,#5548c9,#9673e9);
+  color:white;display:grid;grid-template-columns:1.4fr 1fr;
+  gap:20px;align-items:center;overflow:hidden;
+}
+.hero h1{font-size:clamp(27px,4vw,43px);line-height:1.25;margin:8px 0}
+.hero p{opacity:.9;max-width:580px}
+.hero img{width:100%;max-height:230px;object-fit:cover;border-radius:20px}
+.hero-tag{font-size:12px;letter-spacing:2px;font-weight:bold}
+.primary-btn{
+  border:0;border-radius:12px;background:white;color:#5949c8;
+  font-weight:bold;padding:12px 19px;margin-top:10px;
+}
+.section-title{font-size:23px;margin:32px 0 5px}
+.section-sub{color:var(--muted);margin:0 0 18px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+}
+.card-img{width:100%;height:155px;object-fit:cover;display:block}
+.card-content{padding:17px}
+.card h3{margin:0 0 5px;font-size:17px}
+.card p{margin:0;color:var(--muted);font-size:13px}
+.card-action{
+  margin-top:14px;border:0;border-radius:10px;
+  padding:9px 13px;background:var(--soft);
+  color:var(--primary);font-weight:bold;
+}
+.pill{
+  display:inline-block;padding:4px 10px;border-radius:30px;
+  background:var(--soft);color:var(--primary);
+  font-size:11px;font-weight:bold;margin-bottom:8px;
+}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.stat{
+  background:var(--card);border:1px solid var(--border);
+  padding:17px;border-radius:16px;
+}
+.stat strong{font-size:25px;color:var(--primary);display:block}
+.stat span{font-size:12px;color:var(--muted)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.search{
+  flex:1;min-width:180px;border:1px solid var(--border);
+  background:var(--card);color:var(--text);
+  border-radius:12px;padding:12px 15px;outline:none;
+}
+.select{
+  border:1px solid var(--border);background:var(--card);
+  color:var(--text);border-radius:12px;padding:10px;
+}
+.content-panel{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:24px;margin-top:18px;
+}
+.content-panel h2{color:var(--primary)}
+.lesson-text{font-size:16px;line-height:2}
+.translation{
+  background:var(--soft);padding:15px;border-radius:12px;
+  margin:12px 0;color:var(--text);
+}
+.vocab-table{width:100%;border-collapse:collapse;margin-top:12px}
+.vocab-table th,.vocab-table td{
+  padding:11px;text-align:left;border-bottom:1px solid var(--border);
+}
+.vocab-table th{color:var(--primary);background:var(--soft)}
+.image-wide{width:100%;max-height:350px;object-fit:cover;border-radius:16px}
+.level-tabs{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}
+.level-tab{
+  border:1px solid var(--border);border-radius:30px;
+  background:var(--card);color:var(--text);padding:9px 17px;
+}
+.level-tab.active{background:var(--primary);color:white;border-color:var(--primary)}
+.progress-bg{height:9px;background:var(--border);border-radius:20px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),#ac78ed);width:0}
+.quiz-option{
+  display:block;width:100%;text-align:left;margin:9px 0;
+  padding:12px;border:1px solid var(--border);
+  border-radius:11px;background:var(--card);color:var(--text);
+}
+.quiz-option:hover{border-color:var(--primary)}
+.correct{background:#dcfce7!important;color:#166534!important}
+.wrong{background:#fee2e2!important;color:#991b1b!important}
+.footer{text-align:center;padding:35px 10px;color:var(--muted);font-size:12px}
+.hidden{display:none!important}
+.back-btn{background:var(--soft);border:0;color:var(--primary);padding:9px 14px;border-radius:10px}
+@media(max-width:950px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .layout{grid-template-columns:210px 1fr}
+}
+@media(max-width:650px){
+  .layout{display:block}
+  .sidebar{
+    position:static;height:auto;border-right:0;border-bottom:1px solid var(--border);
+    display:flex;overflow-x:auto;padding:8px;gap:5px;
+  }
+  .side-label{display:none}
+  .nav-btn{white-space:nowrap;width:auto;flex-shrink:0;padding:9px}
+  .main{padding:18px 13px}
+  .hero{grid-template-columns:1fr;padding:24px}
+  .hero img{max-height:170px}
+  .grid{grid-template-columns:1fr}
+  .stats{gap:7px}
+  .stat{padding:11px}
+  .stat strong{font-size:20px}
+  .content-panel{padding:16px}
+  .topbar{padding:0 13px}
+  .brand{font-size:12px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-logo">W</div>
+    <div>WAI'S ENGLISH<br><small>LEARNING ACADEMY</small></div>
+  </div>
+  <div class="top-actions">
+    <button class="icon-btn" onclick="toggleDark()">🌙</button>
+    <button class="icon-btn" onclick="showPage('progress')">👤 My Progress</button>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+  <div class="side-label">MAIN MENU — အဓိကမီနူး</div>
+  <button class="nav-btn active" data-page="home" onclick="showPage('home')">🏠 Home — ပင်မစာမျက်နှာ</button>
+  <button class="nav-btn" data-page="courses" onclick="showPage('courses')">🎓 Courses — သင်တန်းများ</button>
+
+  <div class="side-label">LEARNING — သင်ယူလေ့လာရန်</div>
+  <button class="nav-btn" data-page="grammar" onclick="showPage('grammar')">📘 Grammar — သဒ္ဒါ</button>
+  <button class="nav-btn" data-page="vocabulary" onclick="showPage('vocabulary')">📚 Vocabulary — ဝေါဟာရ</button>
+  <button class="nav-btn" data-page="writing" onclick="showPage('writing')">✍️ Writing — စာရေးသားခြင်း</button>
+  <button class="nav-btn" data-page="speaking" onclick="showPage('speaking')">🗣️ Speaking — စကားပြောခြင်း</button>
+  <button class="nav-btn" data-page="listening" onclick="showPage('listening')">🎧 Listening — နားထောင်ခြင်း</button>
+  <button class="nav-btn" data-page="pronunciation" onclick="showPage('pronunciation')">🔊 Pronunciation — အသံထွက်</button>
+
+  <div class="side-label">READ & ENJOY — ဖတ်ရှုလေ့လာရန်</div>
+  <button class="nav-btn" data-page="reading" onclick="showPage('reading')">📖 Reading Room — စာဖတ်ခန်း</button>
+  <button class="nav-btn" data-page="story" onclick="showPage('story')">📕 Story Room — ပုံပြင်ခန်း</button>
+
+  <div class="side-label">EXAM & PROGRESS — စာမေးပွဲနှင့် တိုးတက်မှု</div>
+  <button class="nav-btn" data-page="quiz" onclick="showPage('quiz')">📝 Quiz — စာမေးပွဲ</button>
+  <button class="nav-btn" data-page="progress" onclick="showPage('progress')">📊 Progress — တိုးတက်မှု</button>
+  <button class="nav-btn" data-page="certificates" onclick="showPage('certificates')">🏆 Certificates — အောင်လက်မှတ်</button>
+</aside>
+
+<main class="main" id="app"></main>
+</div>
+
+<script>
+const app=document.getElementById("app");
+
+const levels=["A1","A2","B1","B2","C1","C2"];
+
+const levelNames={
+ A1:"Beginner — အခြေခံအဆင့်",
+ A2:"Elementary — အခြေခံကျွမ်းကျင်အဆင့်",
+ B1:"Intermediate — အလယ်အလတ်အဆင့်",
+ B2:"Upper Intermediate — အလယ်အလတ်အဆင့်မြင့်",
+ C1:"Advanced — အဆင့်မြင့်",
+ C2:"Proficiency — အလွန်ကျွမ်းကျင်အဆင့်"
+};
+
+const courses=[
+ {id:"grammar",title:"Grammar",my:"သဒ္ဒါ",icon:"📘",desc:"အင်္ဂလိပ်ဝါကျတည်ဆောက်ပုံနှင့် သဒ္ဒါစည်းမျဉ်းများ",img:"https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900"},
+ {id:"vocabulary",title:"Vocabulary",my:"ဝေါဟာရ",icon:"📚",desc:"အခြေခံမှ အဆင့်မြင့်အထိ စကားလုံးများ",img:"https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900"},
+ {id:"writing",title:"Writing",my:"စာရေးသားခြင်း",icon:"✍️",desc:"ဝါကျ၊ စာပိုဒ်၊ စာစီစာကုံးရေးသားနည်း",img:"https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900"},
+ {id:"speaking",title:"Speaking",my:"စကားပြောခြင်း",icon:"🗣️",desc:"နေ့စဉ်စကားပြောနှင့် ဆက်သွယ်ပြောဆိုမှု",img:"https://images.unsplash.com/photo-1529390079861-591de354faf5?w=900"},
+ {id:"listening",title:"Listening",my:"နားထောင်ခြင်း",icon:"🎧",desc:"အင်္ဂလိပ်စကားကို နားလည်နိုင်စွမ်း",img:"https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=900"},
+ {id:"pronunciation",title:"Pronunciation",my:"အသံထွက်",icon:"🔊",desc:"အသံထွက်မှန်ကန်စွာ ပြောဆိုလေ့ကျင့်ခြင်း",img:"https://images.unsplash.com/photo-1509062522246-3755977927d7?w=900"}
+];
+
+const readings=[
+ {
+  id:"mandela",level:"Basic",category:"Great Leaders",
+  title:"Nelson Mandela",
+  mytitle:"နယ်လ်ဆင် မင်ဒဲလား၏ ဘဝအကြောင်း",
+  image:"https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1000",
+  text:"Nelson Mandela was a famous leader from South Africa. He believed that all people deserved freedom and equal rights. He spent many years fighting against racial discrimination. Although he faced many difficulties, he never gave up. His courage and determination inspired people around the world.",
+  translation:"နယ်လ်ဆင် မင်ဒဲလားသည် တောင်အာဖရိကနိုင်ငံမှ ထင်ရှားသော ခေါင်းဆောင်တစ်ဦးဖြစ်သည်။ လူတိုင်းသည် လွတ်လပ်ခွင့်နှင့် တန်းတူညီမျှသော အခွင့်အရေးများ ရရှိသင့်သည်ဟု သူယုံကြည်ခဲ့သည်။ သူသည် လူမျိုးရေးခွဲခြားဆက်ဆံမှုကို ဆန့်ကျင်တိုက်ဖျက်ရန် နှစ်ပေါင်းများစွာ ကြိုးပမ်းခဲ့သည်။ အခက်အခဲများစွာ ကြုံတွေ့ခဲ့ရသော်လည်း သူသည် ဘယ်တော့မှ လက်မလျှော့ခဲ့ပါ။ သူ၏သတ္တိနှင့် ဇွဲလုံ့လသည် ကမ္ဘာတစ်ဝန်းရှိ လူများကို စိတ်ဓာတ်ခွန်အားပေးခဲ့သည်။",
+  vocab:[
+   ["Leader","လီးဒါ","ခေါင်းဆောင်"],
+   ["Freedom","ဖရီးဒမ်း","လွတ်လပ်မှု"],
+   ["Equal","အီကွယ်","တန်းတူညီမျှသော"],
+   ["Courage","ကာရစ်ချ်","သတ္တိ"],
+   ["Difficulty","ဒစ်ဖီကယ်လ်တီ","အခက်အခဲ"],
+   ["Inspire","အင်စပိုင်ယာ","စိတ်ဓာတ်ခွန်အားပေးသည်"]
+  ],
+  phrases:[
+   ["Never give up","နက်ဗာ ဂစ်ဗ် အပ်","ဘယ်တော့မှ လက်မလျှော့ပါနှင့်"],
+   ["Equal rights","အီကွယ် ရိုက်စ်","တန်းတူညီမျှသော အခွင့်အရေးများ"],
+   ["Fight against discrimination","ဖိုက် အဂဲန်စ် ဒစ်စကရိမီနေရှင်း","ခွဲခြားဆက်ဆံမှုကို ဆန့်ကျင်တိုက်ဖျက်သည်"]
+  ],
+  lesson:"အခက်အခဲများကြုံတွေ့ရသော်လည်း မိမိယုံကြည်ရာအတွက် ဇွဲရှိရှိ ကြိုးစားသင့်သည်။ လူတိုင်းကို တန်းတူညီမျှစွာ လေးစားသင့်သည်။"
+ },
+ {
+  id:"space",level:"Basic",category:"Space & Science",
+  title:"The Solar System",
+  mytitle:"နေအဖွဲ့အစည်း",
+  image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1000",
+  text:"The Solar System consists of the Sun and everything that travels around it. There are eight planets in our Solar System. Earth is the planet where we live. The Sun gives us light and heat. Scientists study space to understand the universe.",
+  translation:"နေအဖွဲ့အစည်းတွင် နေနှင့် ၎င်းကို လှည့်ပတ်နေသော အရာဝတ္ထုများ ပါဝင်သည်။ ကျွန်ုပ်တို့၏ နေအဖွဲ့အစည်းတွင် ဂြိုဟ်ရှစ်လုံးရှိသည်။ ကမ္ဘာဂြိုဟ်သည် ကျွန်ုပ်တို့နေထိုင်ရာ ဂြိုဟ်ဖြစ်သည်။ နေသည် ကျွန်ုပ်တို့အား အလင်းရောင်နှင့် အပူကို ပေးသည်။ သိပ္ပံပညာရှင်များသည် စကြဝဠာကို နားလည်နိုင်ရန် အာကာသကို လေ့လာကြသည်။",
+  vocab:[
+   ["Solar System","ဆိုလာ စစ်စတမ်","နေအဖွဲ့အစည်း"],
+   ["Planet","ပလဲနစ်","ဂြိုဟ်"],
+   ["Universe","ယူနီဗာ့စ်","စကြဝဠာ"],
+   ["Scientist","ဆိုင်းယင်တစ်စ်","သိပ္ပံပညာရှင်"],
+   ["Light","လိုက်တ်","အလင်းရောင်"],
+   ["Heat","ဟီးတ်","အပူ"]
+  ],
+  phrases:[
+   ["Travel around","ထရက်ဗယ် အရောင်း","ပတ်လည်လှည့်ပတ်သည်"],
+   ["Outer space","အောက်တာ စပေ့စ်","အာကာသ"],
+   ["Study the universe","စတဒီ ဒ ယူနီဗာ့စ်","စကြဝဠာကို လေ့လာသည်"]
+  ],
+  lesson:"သိချင်စိတ်နှင့် စူးစမ်းလေ့လာလိုစိတ်သည် ပညာသင်ယူမှုကို တိုးတက်စေသည်။"
+ },
+ {
+  id:"advanced-leadership",level:"Advanced",category:"Great Leaders",
+  title:"The Meaning of True Leadership",
+  mytitle:"စစ်မှန်သော ခေါင်းဆောင်မှု၏ အဓိပ္ပာယ်",
+  image:"https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1000",
+  text:"True leadership is not merely the possession of authority or the ability to command others. It is a profound responsibility that demands integrity, empathy, intellectual humility, and an unwavering commitment to the common good. Throughout history, influential leaders have demonstrated that lasting change rarely emerges from power alone. Rather, it is cultivated through perseverance, thoughtful decision-making, and the willingness to acknowledge one's mistakes. A genuinely admirable leader does not simply seek recognition; such a person creates opportunities for others to grow, encourages constructive disagreement, and remains accountable for the consequences of their decisions.",
+  translation:"စစ်မှန်သော ခေါင်းဆောင်မှုဆိုသည်မှာ အာဏာပိုင်ဆိုင်ခြင်း သို့မဟုတ် အခြားသူများကို အမိန့်ပေးနိုင်စွမ်းရှိခြင်းမျှသာ မဟုတ်ပါ။ ၎င်းသည် ကိုယ်ကျင့်တရားခိုင်မာမှု၊ အခြားသူများ၏ ခံစားချက်ကို နားလည်စာနာနိုင်မှု၊ မိမိ၏အသိပညာအပေါ် နှိမ့်ချတတ်မှုနှင့် အများအကျိုးအတွက် မယိမ်းမယိုင်သော ကတိကဝတ်တို့ကို လိုအပ်သည့် နက်နဲသောတာဝန်တစ်ရပ်ဖြစ်သည်။ သမိုင်းတစ်လျှောက် သြဇာရှိသော ခေါင်းဆောင်များက ရေရှည်တည်တံ့သည့် ပြောင်းလဲမှုများသည် အာဏာတစ်ခုတည်းမှ ဖြစ်ပေါ်လာခဲကြောင်း ပြသခဲ့ကြသည်။ ထိုပြောင်းလဲမှုများသည် ဇွဲလုံ့လ၊ စဉ်းစားချင့်ချိန်သော ဆုံးဖြတ်ချက်များနှင့် မိမိ၏အမှားများကို ဝန်ခံလိုစိတ်တို့မှတစ်ဆင့် တည်ဆောက်လာခြင်းဖြစ်သည်။ အမှန်တကယ် လေးစားဖွယ်ကောင်းသော ခေါင်းဆောင်တစ်ဦးသည် အသိအမှတ်ပြုခံရရန်သာ မကြိုးစားဘဲ အခြားသူများ တိုးတက်လာနိုင်မည့် အခွင့်အလမ်းများ ဖန်တီးပေးပြီး အပြုသဘောဆောင်သော သဘောထားကွဲလွဲမှုများကို အားပေးကာ မိမိ၏ဆုံးဖြတ်ချက်များ၏ အကျိုးဆက်များအတွက် တာဝန်ယူတတ်သူဖြစ်သည်။",
+  vocab:[
+   ["Integrity","အင်တဲဂရတီ","ကိုယ်ကျင့်တရားခိုင်မာမှု"],
+   ["Empathy","အဲမ်ပသီ","သူတစ်ပါး၏ခံစားချက်ကို နားလည်စာနာမှု"],
+   ["Perseverance","ပါဆဗီယာရန့်စ်","ဇွဲလုံ့လ"],
+   ["Accountable","အကောင်းတဘယ်","တာဝန်ခံရသော"],
+   ["Unwavering","အန်ဝေးဗရင်း","မယိမ်းမယိုင်သော"],
+   ["Constructive","ကန်စထရတ်တစ်ဗ်","အကျိုးရှိစေသော"]
+  ],
+  phrases:[
+   ["Common good","ကော်မန် ဂွတ်ဒ်","အများအကျိုး"],
+   ["Thoughtful decision-making","သော့ဖူးလ် ဒီစစ်ရှင်း မေးကင်း","စဉ်းစားချင့်ချိန်၍ ဆုံးဖြတ်ခြင်း"],
+   ["Acknowledge one's mistakes","အက်နော်လစ်ချ် ဝမ်းစ် မစ်စတိတ်စ်","မိမိ၏အမှားများကို ဝန်ခံသည်"]
+  ],
+  lesson:"စစ်မှန်သောခေါင်းဆောင်တစ်ဦးသည် အာဏာထက် တာဝန်ယူမှု၊ ကိုယ်ကျင့်တရားနှင့် အများအကျိုးကို ပိုမိုအလေးထားရသည်။"
+ }
+];
+
+const stories=[
+ {
+  id:"little-star",level:"Basic",category:"Moral Stories",
+  title:"The Little Star",
+  mytitle:"ကြယ်ကလေးလေး",
+  image:"https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?w=1000",
+  text:"Once upon a time, there was a little star in the night sky. The little star was not as bright as the other stars. Every night, it looked at the big stars and felt sad. One evening, a lost traveler looked up at the sky. He saw the little star and used its light to find his way home. The little star finally understood that even a small light could make a big difference.",
+  translation:"တစ်ခါတုန်းက ညကောင်းကင်ယံမှာ ကြယ်ကလေးတစ်ပွင့် ရှိခဲ့တယ်။ အဲဒီကြယ်ကလေးဟာ အခြားကြယ်ကြီးတွေလို မတောက်ပခဲ့ဘူး။ ညတိုင်း ကြယ်ကြီးတွေကို ကြည့်ပြီး ဝမ်းနည်းနေခဲ့တယ်။ တစ်ညနေမှာ လမ်းပျောက်နေတဲ့ ခရီးသွားတစ်ဦးက ကောင်းကင်ကို မော့ကြည့်ခဲ့တယ်။ သူဟာ ကြယ်ကလေးရဲ့ အလင်းရောင်ကို မြင်ပြီး အိမ်ပြန်လမ်းကို ရှာတွေ့ခဲ့တယ်။ အဲဒီအခါ ကြယ်ကလေးဟာ အလင်းရောင်သေးသေးလေးတစ်ခုကတောင် ကြီးမားတဲ့ အကျိုးသက်ရောက်မှုကို ဖြစ်စေနိုင်ကြောင်း နားလည်သွားခဲ့တယ်။",
+  vocab:[
+   ["Star","စတာ","ကြယ်"],
+   ["Bright","ဘရိုက်တ်","တောက်ပသော"],
+   ["Traveler","ထရက်ဗလာ","ခရီးသွား"],
+   ["Lost","လော့စ်တ်","ပျောက်ဆုံးနေသော"],
+   ["Light","လိုက်တ်","အလင်းရောင်"]
+  ],
+  phrases:[
+   ["Once upon a time","ဝမ်းစ် အပေါန် အ တိုင်းမ်","ရှေးရှေးတုန်းက"],
+   ["Find the way home","ဖိုင်းဒ် ဒ ဝေး ဟုမ်း","အိမ်ပြန်လမ်းကို ရှာတွေ့သည်"]
+  ],
+  lesson:"မိမိကိုယ်ကို သေးငယ်သူဟု မထင်ပါနှင့်။ လူတိုင်းတွင် တန်ဖိုးရှိပြီး အခြားသူများအတွက် အကျိုးပြုနိုင်စွမ်း ရှိသည်။"
+ },
+ {
+  id:"hidden-library",level:"Advanced",category:"Mystery",
+  title:"The Library Behind the Clock",
+  mytitle:"နာရီကြီးနောက်ကွယ်မှ လျှို့ဝှက်စာကြည့်တိုက်",
+  image:"https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1000",
+  text:"The old mansion had stood at the edge of the village for nearly a century, its windows clouded with dust and its enormous clock permanently frozen at eleven minutes past midnight. Most residents avoided the building, convinced that its silent corridors concealed something deeply unsettling. Yet Eleanor, a young historian with an insatiable curiosity, regarded the mansion not as a place of terror but as an unanswered question. On a stormy evening, she discovered a narrow passage behind the clock. Beyond it lay a magnificent library, filled with handwritten journals, forgotten maps, and letters addressed to people whose names had vanished from public records. As she examined the documents, Eleanor began to suspect that the mansion preserved a history someone had deliberately attempted to erase.",
+  translation:"ထိုအိမ်ကြီးဟောင်းသည် ရွာအစွန်အဖျားတွင် ရာစုနှစ်တစ်ခုနီးပါး တည်ရှိနေခဲ့သည်။ ၎င်း၏ပြတင်းပေါက်များမှာ ဖုန်မှုန့်များဖြင့် မှုန်ဝါးနေပြီး အလွန်ကြီးမားသော နာရီကြီးသည် ညသန်းခေါင်ကျော် ဆယ့်တစ်မိနစ်အချိန်တွင် ရပ်တန့်နေခဲ့သည်။ ရွာသားအများစုသည် ထိုအဆောက်အအုံ၏ တိတ်ဆိတ်သော စင်္ကြံလမ်းများအတွင်း ကြောက်မက်ဖွယ်ရာတစ်ခုခု ဖုံးကွယ်နေသည်ဟု ယုံကြည်ကြသဖြင့် ရှောင်ရှားခဲ့ကြသည်။ သို့သော် မငြိမ်မသက် သိချင်စိတ်ပြင်းပြသော သမိုင်းသုတေသီလူငယ် အီလီနာက ထိုအိမ်ကြီးကို ကြောက်စရာနေရာတစ်ခုအဖြစ် မမြင်ဘဲ အဖြေမရသေးသော မေးခွန်းတစ်ခုအဖြစ် ရှုမြင်ခဲ့သည်။ မုန်တိုင်းထန်သော ညနေတစ်ခုတွင် သူမသည် နာရီကြီးနောက်ကွယ်၌ ကျဉ်းမြောင်းသော လမ်းကြောင်းတစ်ခုကို ရှာဖွေတွေ့ရှိခဲ့သည်။ ထိုလမ်းကြောင်း၏ အခြားတစ်ဖက်တွင် လက်ရေးမှတ်တမ်းများ၊ မေ့ပျောက်နေသော မြေပုံများနှင့် အများပြည်သူဆိုင်ရာ မှတ်တမ်းများမှ အမည်များ ပျောက်ကွယ်သွားခဲ့သူများထံ လိပ်မူထားသော စာများဖြင့် ပြည့်နှက်နေသည့် ခမ်းနားလှသော စာကြည့်တိုက်တစ်ခု ရှိနေခဲ့သည်။ ထိုစာရွက်စာတမ်းများကို လေ့လာရင်း အီလီနာသည် တစ်စုံတစ်ဦးက ရည်ရွယ်ချက်ရှိရှိ ဖျောက်ဖျက်ရန် ကြိုးစားခဲ့သော သမိုင်းတစ်ခုကို ထိုအိမ်ကြီးက ထိန်းသိမ်းထားသည်ဟု သံသယဝင်လာခဲ့သည်။",
+  vocab:[
+   ["Mansion","မန်ရှန်","အိမ်ကြီး၊ ခမ်းနားသောအိမ်"],
+   ["Conceal","ကန်စီးလ်","ဖုံးကွယ်သည်"],
+   ["Unsettling","အန်ဆက်တလင်း","စိတ်မသက်မသာဖြစ်စေသော"],
+   ["Insatiable","အင်ဆေးရှဘယ်","မပြည့်ဝနိုင်သော၊ အလွန်ပြင်းပြသော"],
+   ["Magnificent","မက်ဂ်နစ်ဖစ်ဆင့်","ခမ်းနားထည်ဝါသော"],
+   ["Deliberately","ဒီလစ်ဘရိတ်လီ","ရည်ရွယ်ချက်ရှိရှိ"],
+   ["Erase","အီရေးစ်","ဖျက်ပစ်သည်"]
+  ],
+  phrases:[
+   ["At the edge of the village","အက် ဒ အက်ချ် အဗ် ဒ ဗီလစ်ချ်","ရွာအစွန်အဖျားတွင်"],
+   ["An unanswered question","အန် အန်အန်ဆာဒ် ကွက်စ်ချန်","အဖြေမရသေးသော မေးခွန်း"],
+   ["Public records","ပတ်ဘလစ် ရက်ကော့ဒ်စ်","အများပြည်သူဆိုင်ရာ မှတ်တမ်းများ"]
+  ],
+  
